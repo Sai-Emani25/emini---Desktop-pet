@@ -124,15 +124,81 @@
                     </div>
                 </div>
             </section>
+
+            <!-- AI Helper Section -->
+            <section class="ai-helper-section">
+                <div class="ai-header">
+                    <h3>🤖 AI Co-Pilot (like Clippy!)</h3>
+                    <div class="ai-status">
+                        <span id="aiStatus" class="status-indicator offline">Offline</span>
+                    </div>
+                </div>
+
+                <!-- API Key Setup -->
+                <div class="api-setup" id="apiSetup">
+                    <p class="setup-text">🔑 Setup your Google Gemini API key to enable AI suggestions</p>
+                    <div class="api-input-group">
+                        <input type="password" id="apiKeyInput" placeholder="Enter Gemini API key..." class="api-input">
+                        <button id="saveApiKeyBtn" class="save-key-btn">Save</button>
+                    </div>
+                    <a href="https://makersuite.google.com/app/apikey" target="_blank" class="get-key-link">
+                        Get free API key →
+                    </a>
+                </div>
+
+                <!-- AI Speech Bubble -->
+                <div class="ai-suggestion-container" id="aiSuggestionContainer" style="display: none;">
+                    <div class="speech-bubble">
+                        <div class="bubble-header">
+                            <span class="clippy-emoji">📎</span>
+                            <span class="bubble-title">emini suggests:</span>
+                        </div>
+                        <p id="aiSuggestionText" class="suggestion-text">
+                            Hi! I'm your AI helper. Ask me anything!
+                        </p>
+                        <div class="suggestion-actions">
+                            <button id="dismissSuggestionBtn" class="dismiss-btn">Dismiss</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Actions -->
+                <div class="ai-actions" id="aiActions" style="display: none;">
+                    <div class="ai-input-group">
+                        <input type="text" id="userQuestionInput" placeholder="Ask me anything..." class="question-input">
+                        <button id="askAIBtn" class="ask-btn">Ask</button>
+                    </div>
+                    
+                    <div class="quick-actions">
+                        <button class="quick-btn" id="smartSuggestionBtn">
+                            <span class="emoji">💡</span>
+                            <span>Smart Tip</span>
+                        </button>
+                        <button class="quick-btn" id="clipboardAnalyzeBtn">
+                            <span class="emoji">📋</span>
+                            <span>Analyze Clipboard</span>
+                        </button>
+                        <button class="quick-btn" id="mealPlanBtn">
+                            <span class="emoji">🍽️</span>
+                            <span>Meal Ideas</span>
+                        </button>
+                        <button class="quick-btn" id="studyPlanBtn">
+                            <span class="emoji">📚</span>
+                            <span>Study Help</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
         </main>
 
         <footer>
-            <p>Made with 💚 | Digital Pet Application</p>
+            <p>Made with 💚 | AI-Powered Daily Life Co-Pilot</p>
         </footer>
     </div>
 
     <script src="Pet.js"></script>
     <script src="PetAssets.js"></script>
+    <script src="AIHelper.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

@@ -5,6 +5,9 @@
 // Global pet instance
 let myPet = new Pet("emini");
 
+// AI Helper instance
+let aiHelper = new AIHelper();
+
 // Game settings
 const UPDATE_INTERVAL = 1000; // Update pet status every 1 second
 let gameLoopId = null;
@@ -15,19 +18,50 @@ let gameLoopId = null;
 function init() {
   loadPetAsset(myPet.mood);
   attachEventListeners();
+  initializeAIHelper();
   startGameLoop();
   updateUI();
+}
+
+/**
+ * Initialize AI Helper
+ */
+function initializeAIHelper() {
+  // Try to load saved API key
+  const hasKey = aiHelper.loadApiKey();
+  
+  if (hasKey) {
+    showAIControls();
+    updateAIStatus(true);
+  } else {
+    showAPISetup();
+  }
 }
 
 /**
  * Attach event listeners to action buttons
  */
 function attachEventListeners() {
+  // Pet action buttons
   document.getElementById("feedBtn").addEventListener("click", handleFeed);
   document.getElementById("playBtn").addEventListener("click", handlePlay);
   document.getElementById("sleepBtn").addEventListener("click", handleSleep);
   document.getElementById("petBtn").addEventListener("click", handlePet);
   document.getElementById("healBtn").addEventListener("click", handleHeal);
+
+  // AI Helper buttons
+  document.getElementById("saveApiKeyBtn").addEventListener("click", handleSaveApiKey);
+  document.getElementById("askAIBtn").addEventListener("click", handleAskAI);
+  document.getElementById("smartSuggestionBtn").addEventListener("click", handleSmartSuggestion);
+  document.getElementById("clipboardAnalyzeBtn").addEventListener("click", handleClipboardAnalysis);
+  document.getElementById("mealPlanBtn").addEventListener("click", handleMealPlan);
+  document.getElementById("studyPlanBtn").addEventListener("click", handleStudyPlan);
+  document.getElementById("dismissSuggestionBtn").addEventListener("click", dismissSuggestion);
+
+  // Enter key for question input
+  document.getElementById("userQuestionInput").addEventListener("keypress", (e) => {
+    if (e.key === "Enter") handleAskAI();
+  });
 }
 
 /**
@@ -272,3 +306,188 @@ window.addEventListener("load", function () {
     }
   }
 });
+
+/* ==================== AI Helper Functions ==================== */
+
+/**
+ * Save API key and enable AI helper
+ */
+async function handleSaveApiKey() {
+  const apiKeyInput = document.getElementById("apiKeyInput");
+  const apiKey = apiKeyInput.value.trim();
+
+  if (!apiKey) {
+    showFeedback("❌ Please enter a valid API key");
+    return;
+  }
+
+  aiHelper.setApiKey(apiKey);
+  
+  // Test the API key
+  showFeedback("🔄 Testing API key...");
+  
+  const result = await aiHelper.getSuggestion({
+    userInput: "Say hello and introduce yourself as emini, the AI helper!"
+  });
+
+  if (result.success) {
+    showAIControls();
+    updateAIStatus(true);
+    showAISuggestion(result.suggestion);
+    apiKeyInput.value = "";
+    showFeedback("✅ AI Helper activated!");
+  } else {
+    showFeedback(`❌ ${result.message}`);
+    aiHelper.setApiKey(null);
+  }
+}
+
+/**
+ * Handle user question to AI
+ */
+async function handleAskAI() {
+  const questionInput = document.getElementById("userQuestionInput");
+  const question = questionInput.value.trim();
+
+  if (!question) {
+    showFeedback("❓ Please ask a question");
+    return;
+  }
+
+  showFeedback("🤔 Thinking...");
+  
+  const result = await aiHelper.getSuggestion({
+    userInput: question,
+    petStatus: myPet.getStatus()
+  });
+
+  if (result.success) {
+    showAISuggestion(result.suggestion);
+    questionInput.value = "";
+  } else {
+    showFeedback(`❌ ${result.message}`);
+  }
+}
+
+/**
+ * Get smart suggestion based on time and context
+ */
+async function handleSmartSuggestion() {
+  showFeedback("💡 Getting smart suggestion...");
+  
+  const result = await aiHelper.getSmartSuggestion(myPet.getStatus());
+
+  if (result.success) {
+    showAISuggestion(result.suggestion);
+  } else {
+    showFeedback(`❌ ${result.message}`);
+  }
+}
+
+/**
+ * Analyze clipboard content
+ */
+async function handleClipboardAnalysis() {
+  showFeedback("📋 Analyzing clipboard...");
+  
+  const result = await aiHelper.analyzeClipboard();
+
+  if (result.success) {
+    showAISuggestion(result.suggestion);
+  } else {
+    showFeedback(`❌ ${result.message}`);
+  }
+}
+
+/**
+ * Generate meal plan
+ */
+async function handleMealPlan() {
+  const ingredients = prompt("What ingredients do you have? (e.g., chicken, rice, broccoli)");
+  
+  if (!ingredients) return;
+
+  showFeedback("🍽️ Creating meal ideas...");
+  
+  const result = await aiHelper.generateMealPlan(ingredients);
+
+  if (result.success) {
+    showAISuggestion(result.suggestion);
+  } else {
+    showFeedback(`❌ ${result.message}`);
+  }
+}
+
+/**
+ * Generate study plan
+ */
+async function handleStudyPlan() {
+  const syllabus = prompt("Paste your syllabus text or study materials:");
+  
+  if (!syllabus) return;
+
+  showFeedback("📚 Creating study plan...");
+  
+  const result = await aiHelper.generateStudySchedule(syllabus);
+
+  if (result.success) {
+    showAISuggestion(result.suggestion);
+  } else {
+    showFeedback(`❌ ${result.message}`);
+  }
+}
+
+/**
+ * Show AI suggestion in speech bubble
+ */
+function showAISuggestion(suggestion) {
+  const container = document.getElementById("aiSuggestionContainer");
+  const textElement = document.getElementById("aiSuggestionText");
+  
+  textElement.textContent = suggestion;
+  container.style.display = "block";
+  
+  // Make pet happy when AI helps
+  myPet.happiness = Math.min(100, myPet.happiness + 5);
+  updateUI();
+}
+
+/**
+ * Dismiss AI suggestion
+ */
+function dismissSuggestion() {
+  const container = document.getElementById("aiSuggestionContainer");
+  container.style.display = "none";
+}
+
+/**
+ * Show AI controls
+ */
+function showAIControls() {
+  document.getElementById("apiSetup").style.display = "none";
+  document.getElementById("aiActions").style.display = "block";
+}
+
+/**
+ * Show API setup
+ */
+function showAPISetup() {
+  document.getElementById("apiSetup").style.display = "block";
+  document.getElementById("aiActions").style.display = "none";
+}
+
+/**
+ * Update AI status indicator
+ */
+function updateAIStatus(online) {
+  const statusElement = document.getElementById("aiStatus");
+  if (online) {
+    statusElement.textContent = "Online";
+    statusElement.classList.remove("offline");
+    statusElement.classList.add("online");
+  } else {
+    statusElement.textContent = "Offline";
+    statusElement.classList.remove("online");
+    statusElement.classList.add("offline");
+  }
+}

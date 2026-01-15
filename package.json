@@ -1,16 +1,22 @@
 {
-  "name": "emini",
-  "version": "1.0.0",
-  "description": "A charming, interactive digital pet application built with vanilla JavaScript",
+  "name": "emini-ai-copilot",
+  "version": "2.0.0",
+  "description": "An AI-powered daily life assistant combining a charming digital pet with Google Gemini integration - like Clippy but actually helpful!",
   "main": "app.js",
   "scripts": {
     "start": "open index.html"
   },
   "keywords": [
+    "ai-assistant",
     "digital-pet",
-    "pet-simulator",
+    "google-gemini",
+    "daily-helper",
+    "productivity",
+    "meal-planning",
+    "study-helper",
+    "clippy",
+    "copilot",
     "interactive",
-    "game",
     "javascript",
     "html5",
     "css3",
@@ -20,10 +26,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/emini.git"
+    "url": "https://github.com/yourusername/emini-ai-copilot.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/emini/issues"
+    "url": "https://github.com/yourusername/emini-ai-copilot/issues"
   },
-  "homepage": "https://github.com/yourusername/emini#readme"
+  "homepage": "https://github.com/yourusername/emini-ai-copilot#readme"
 }
