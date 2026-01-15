@@ -1,0 +1,29 @@
+{
+  "name": "emini",
+  "version": "1.0.0",
+  "description": "A charming, interactive digital pet application built with vanilla JavaScript",
+  "main": "app.js",
+  "scripts": {
+    "start": "open index.html"
+  },
+  "keywords": [
+    "digital-pet",
+    "pet-simulator",
+    "interactive",
+    "game",
+    "javascript",
+    "html5",
+    "css3",
+    "svg"
+  ],
+  "author": "emini Project",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/emini.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/emini/issues"
+  },
+  "homepage": "https://github.com/yourusername/emini#readme"
+}

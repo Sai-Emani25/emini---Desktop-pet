@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>emini - Your Digital Pet</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐱 emini</h1>
+            <p>Your adorable digital pet companion</p>
+        </header>
+
+        <main>
+            <!-- Pet Display Section -->
+            <section class="pet-section">
+                <div class="pet-container">
+                    <svg id="petSvg" class="pet-sprite" viewBox="0 0 200 220" width="200" height="220">
+                        <!-- This will be filled by the SVG asset -->
+                    </svg>
+                    <div class="mood-display">
+                        <span id="moodEmoji" class="mood-emoji">😊</span>
+                    </div>
+                </div>
+
+                <div class="pet-info">
+                    <h2 id="petName">emini</h2>
+                    <p id="statusMessage" class="status-message">emini is doing fine!</p>
+                    <p class="age-display">Age: <span id="petAge">0</span> min</p>
+                </div>
+            </section>
+
+            <!-- Status Bars -->
+            <section class="stats-section">
+                <div class="stat-bar">
+                    <label>Hunger</label>
+                    <div class="bar-container">
+                        <div id="hungerBar" class="bar hunger-bar" style="width: 50%"></div>
+                    </div>
+                    <span id="hungerValue">50</span>
+                </div>
+
+                <div class="stat-bar">
+                    <label>Happiness</label>
+                    <div class="bar-container">
+                        <div id="happinessBar" class="bar happiness-bar" style="width: 75%"></div>
+                    </div>
+                    <span id="happinessValue">75</span>
+                </div>
+
+                <div class="stat-bar">
+                    <label>Energy</label>
+                    <div class="bar-container">
+                        <div id="energyBar" class="bar energy-bar" style="width: 80%"></div>
+                    </div>
+                    <span id="energyValue">80</span>
+                </div>
+
+                <div class="stat-bar">
+                    <label>Health</label>
+                    <div class="bar-container">
+                        <div id="healthBar" class="bar health-bar" style="width: 90%"></div>
+                    </div>
+                    <span id="healthValue">90</span>
+                </div>
+            </section>
+
+            <!-- Action Buttons -->
+            <section class="actions-section">
+                <button class="action-btn feed-btn" id="feedBtn">
+                    <span class="emoji">🍖</span>
+                    <span>Feed</span>
+                </button>
+                <button class="action-btn play-btn" id="playBtn">
+                    <span class="emoji">🎮</span>
+                    <span>Play</span>
+                </button>
+                <button class="action-btn sleep-btn" id="sleepBtn">
+                    <span class="emoji">😴</span>
+                    <span>Sleep</span>
+                </button>
+                <button class="action-btn pet-btn" id="petBtn">
+                    <span class="emoji">🤚</span>
+                    <span>Pet</span>
+                </button>
+                <button class="action-btn heal-btn" id="healBtn">
+                    <span class="emoji">💊</span>
+                    <span>Heal</span>
+                </button>
+            </section>
+
+            <!-- Action Feedback -->
+            <div id="feedback" class="feedback"></div>
+
+            <!-- Stats Display -->
+            <section class="detailed-stats">
+                <h3>Detailed Stats</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">Hunger:</span>
+                        <span id="detailedHunger">50</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Happiness:</span>
+                        <span id="detailedHappiness">75</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Energy:</span>
+                        <span id="detailedEnergy">80</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Health:</span>
+                        <span id="detailedHealth">90</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Mood:</span>
+                        <span id="detailedMood">happy</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Age:</span>
+                        <span id="detailedAge">0 min</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Made with 💚 | Digital Pet Application</p>
+        </footer>
+    </div>
+
+    <script src="Pet.js"></script>
+    <script src="PetAssets.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
